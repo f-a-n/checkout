@@ -1,3 +1,7 @@
+import {Cart, hello} from './cart.js';
+
+const MyCart = new Cart();
+
 // Hardcoded array of items:
 const itemsForSale = [{
     name: "iPhone 13",
@@ -41,9 +45,16 @@ itemsForSale.map((item) => {
     const itemButton = document.createElement("button");
     itemButton.innerHTML = "add to cart"; 
     itemButton.addEventListener("click", (e) => {
-        console.log(e.target.parentElement.dataset.id);
+        const id = parseInt(e.target.parentElement.dataset.id);
+        // get this item by id, add it to the cart!
+        const item = itemsForSale.find((item) => {
+            return item.id === id;
+        });
+        // TODO: make quantity user-selectable!
+        const quantity = 1;
+        MyCart.addItem(item, quantity);
+        console.log(`Total price: ${MyCart.totalPrice}`)
     })
-
     itemDiv.appendChild(itemButton);
     productContainer.appendChild(itemDiv)  
 });
@@ -56,3 +67,5 @@ itemsForSale.map((item) => {
     // delete item
     // display cart (?)
     // 
+
+hello();
